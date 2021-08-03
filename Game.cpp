@@ -2,10 +2,14 @@
 
 Game::Game()
 	:
-	screenSize{1000, 800},
-	endGame{ false }
+	screenSize{ 1000, 800 },
+	endGame{ false },
+	spawnTimerMax{ 10.f },
+	spawnTimer{ spawnTimerMax },
+	maxSwagBalls{ 7 }
 {
 	window = new sf::RenderWindow(screenSize, "Game Window", sf::Style::Close | sf::Style::Titlebar);
+	window->setFramerateLimit(60);
 }
 
 Game::~Game()
@@ -27,15 +31,36 @@ void Game::PollingEvents()
 	}
 }
 
+void Game::SpawnSwagBalls()
+{
+	if (spawnTimer <= spawnTimerMax)
+		spawnTimer += 1.f;
+	else
+	{
+		if (static_cast<int>(swagBalls.size()) <= maxSwagBalls)
+		{
+			swagBalls.push_back(SwagBall(window));
+			spawnTimer = 0.f;
+		}
+	}
+}
+
 void Game::Update()
 {
 	PollingEvents();
+	player.Update(window);
+	SpawnSwagBalls();
 }
 
 void Game::Render()
 {
 	window->clear();
-	
+
+	for (auto& i : swagBalls)
+	{
+		i.Render(window);
+	}
 	player.Render(window);
+
 	window->display();
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Player.h"
+#include "SwagBall.h"
 
 class Game
 {
@@ -11,8 +12,13 @@ private:
 	sf::Event env;
 
 	Player player;
+	std::vector<SwagBall> swagBalls;
+	float spawnTimerMax;
+	float spawnTimer;
+	int maxSwagBalls;
 
 	void PollingEvents();
+	void SpawnSwagBalls();
 
 public:
 	Game();

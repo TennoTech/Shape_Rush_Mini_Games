@@ -6,11 +6,12 @@ class Player
 {
 private:
 	sf::RectangleShape shape;
+	float movementSpeed;
 
 public:
-	Player();
+	Player(float x = 0.f, float y = 0.f);
 	~Player();
 
-	void Update();
-	void Render(sf::RenderTarget* target);
+	void Update(sf::RenderTarget* window);
+	void Render(sf::RenderTarget* window);
 };
