@@ -50,6 +50,14 @@ void Game::Update()
 	PollingEvents();
 	player.Update(window);
 	SpawnSwagBalls();
+
+	for (size_t i = 0; i < swagBalls.size(); i++)
+	{
+		if (
+			player.GetPlayer().getGlobalBounds().intersects(
+				swagBalls[i].GetSwagBall().getGlobalBounds()))
+			swagBalls.erase(swagBalls.begin() + i);
+	}
 }
 
 void Game::Render()

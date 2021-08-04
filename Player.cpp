@@ -4,7 +4,9 @@
 
 Player::Player(float x, float y)
 	:
-	movementSpeed{ 7.5f }
+	movementSpeed{ 7.5f },
+	healthMax{ 10 },
+	health{ healthMax }
 {
 	shape.setPosition(x, y);
 	shape.setFillColor(sf::Color::Magenta);
@@ -13,6 +15,11 @@ Player::Player(float x, float y)
 
 Player::~Player()
 {
+}
+
+const sf::RectangleShape& Player::GetPlayer() const
+{
+	return shape;
 }
 
 void Player::Update(sf::RenderTarget* window)
