@@ -13,13 +13,31 @@ Player::Player(float x, float y)
 	shape.setSize(sf::Vector2f(50.f, 50.f));
 }
 
-Player::~Player()
-{
-}
-
 const sf::RectangleShape& Player::GetPlayer() const
 {
 	return shape;
+}
+
+const short& Player::GetHealth() const
+{
+	return health;
+}
+
+const short& Player::GetHealthMax() const
+{
+	return healthMax;
+}
+
+void Player::TakeDamage(const short damage)
+{
+	if (!health <= 0)
+		health -= damage;
+}
+
+void Player::GainHealth(const short additionalHealth)
+{
+	if (health < healthMax)
+		health += additionalHealth;
 }
 
 void Player::Update(sf::RenderTarget* window)

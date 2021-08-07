@@ -12,9 +12,14 @@ private:
 
 public:
 	Player(float x = 0.f, float y = 0.f);
-	~Player();
 
 	const sf::RectangleShape& GetPlayer() const;
+	const short& GetHealth() const;
+	const short& GetHealthMax() const;
+
+	void TakeDamage(const short damage);
+	void GainHealth(const short additionalHealth);
+
 	void Update(sf::RenderTarget* window);
 	void Render(sf::RenderTarget* window);
 };
